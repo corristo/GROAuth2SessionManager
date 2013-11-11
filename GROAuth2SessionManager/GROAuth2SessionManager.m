@@ -83,8 +83,11 @@ NSString * const kGROAuthRefreshGrantType = @"refresh_token";
 }
 
 - (void)setAuthorizationHeaderWithToken:(NSString *)token ofType:(NSString *)type {
-    // See http://tools.ietf.org/html/rfc6749#section-7.1
-    if ([[type lowercaseString] isEqualToString:@"bearer"]) {
+    if (type == nil) {
+        [[self requestSerializer] setValue:[NSString stringWithFormat:@"OAuth %@", token] forHTTPHeaderField:@"Authorization"];
+    }
+    else if ([[type lowercaseString] isEqualToString:@"bearer"]) {
+        // See http://tools.ietf.org/html/rfc6749#section-7.1
         [[self requestSerializer] setValue:[NSString stringWithFormat:@"Bearer %@", token] forHTTPHeaderField:@"Authorization"];
     }
 }
