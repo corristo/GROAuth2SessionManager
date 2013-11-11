@@ -60,7 +60,7 @@ NSString * const kGROAuthRefreshGrantType = @"refresh_token";
 - (id)initWithBaseURL:(NSURL *)url oAuthURL:(NSURL *)oAuthURL clientID:(NSString *)clientID secret:(NSString *)secret {
     NSParameterAssert(clientID);
 
-    self = [super initWithBaseURL:url];
+    self = [self initWithBaseURL:url];
     if (self) {
         [self setServiceProviderIdentifier:[[self baseURL] host]];
         [self setClientID:clientID];
